@@ -15,12 +15,14 @@ void sort_by_area(triangle *tr, int n)
     /**
 	* Sort an array a of the length n
 	*/
-    float *area = malloc(n * sizeof(float));
+    float *area = malloc(n * sizeof(float)); //we can also use int
 
     for (int i = 0; i < n; i++)
     {
-        float p = (float)(tr[i].a + tr[i].b + tr[i].c);
-        double a = (double)(p * p - tr[1].a * p - tr[1].b * p - tr[1].c);
+        float p = (float)((tr[i].a + tr[i].b + tr[i].c) / 2.0);
+
+        // /2.0 is compulsary coz int gives you int and float gives float
+        double a = (double)(p * (p - tr[i].a) * (p - tr[i].b) * (p - tr[i].c));
         area[i] = (float)a;
     }
     // now use binary sort
@@ -35,10 +37,21 @@ void sort_by_area(triangle *tr, int n)
                 area[j] = area[j + 1];
                 area[j + 1] = temp;
 
-                // change triangle
+                // change triangle by swaping there value
                 triangle tem = tr[j]; //tr is triangle type datatype
                 tr[j] = tr[j + 1];
                 tr[j + 1] = tem;
+
+                /* int tem=tr[j].a;   //values of tr type datatype is int
+                tr[j].a=tr[j+1].a;
+                tr[j+1].a=tem;
+                tem=tr[j].b;   
+                tr[j].b=tr[j+1].b;
+                tr[j+1].b=tem;
+                tem=tr[j].c;   
+                tr[j].c=tr[j+1].c;
+                tr[j+1].c=tem;
+                */
             }
         }
     }
