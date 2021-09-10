@@ -55,14 +55,17 @@ int main()
             //to incease the no of book at given shelf
             total_number_of_books[shelf]++;
 
-            // go to the shelf where we have inset pages of 2D array
-            int *book = total_number_of_pages[shelf];
-            while (*(book) != 0) //find index where is no pages
-                book++;
-
+         // go to the shelf where we have inset pages of 2D array
+            // and give address to book
+            total_number_of_pages[shelf]=realloc(total_number_of_pages[shelf],total_number_of_books[shelf]*sizeof(int));
+           
+           *(total_number_of_pages[shelf]+total_number_of_books[shelf]-1)=pages;
+           //...... while(*(book) != 0) //find index where is no pages
+           //......  book++;
+             
             // now after loop  we are on index where is no pages
             // so initilize pages
-            *book = pages;
+            //*book=pages;
         }
         else if (type_of_query == 2)
         {
